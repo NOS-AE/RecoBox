@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#d3d7d4</color>
+    <color name="colorPrimaryDark">@color/white_bg</color>
+    <color name="colorAccent">@color/colorTheme</color>
+
+    <color name="colorTheme">#dd5454</color>
+    <color name="colorDotUnselected">#C8C8C8</color>
+    <color name="white_bg">#FAFAFA</color>
+    <color name="white">#FFF</color>
+    <color name="colorCursor">#aFFF</color>
+    <color name="colorHint">#6FFF</color>
+    <color name="colorFont">#373737</color>
+    <color name="colorRecordUnpressed">#c8c8c8</color>
+    <color name="colorRecordPressed">#888888</color>
+    <color name="colorSyncUnpressed">#ddd</color>
+    
+    <color name="colorSlideEdit">#e0e0e0</color>
+    <color name="colorSlideShare">#8b8b8b</color>
+    <color name="colorQQLogin">#12b7f5</color>
+
+    <color name="trasparent">#0000</color>
+</resources>

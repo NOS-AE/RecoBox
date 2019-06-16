@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <!--后端id-->
+        <domain includeSubdomains="true">47.102.118.1</domain>
+        <!--qq头像id-->
+        <domain includeSubdomains="true">qzapp.qlogo.cn</domain>
+        <!--qq登录日志中有报此url，暂时没用-->
+        <domain includeSubdomains="true">http://cgi.connect.qq.com</domain>
+        <!--后端头像-->
+        <domain includeSubdomains="true">img03.sogoucdn.com</domain>
+    </domain-config>
+</network-security-config>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LevelView">
+        <attr name="android:text"/>
+        <attr name="android:textSize"/>
+    </declare-styleable>
+
+    <declare-styleable name="SlidingMenu">
+        <attr name="folder" format="boolean"/>
+    </declare-styleable>
+
+</resources>

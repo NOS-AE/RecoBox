@@ -1,0 +1,69 @@
+<resources>
+
+    <!-- WelcomeActivity -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/white_bg</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:colorEdgeEffect">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/white_bg</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- QQLoginActivity -->
+    <style name="QQLoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/login_bg</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- RecordActivity -->
+    <style name="RecordActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/white_bg</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:colorEdgeEffect">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/white_bg</item>
+        <item name="android:statusBarColor">@color/white_bg</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <!-- RecordListActivity -->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/colorTheme</item>
+        <item name="searchViewStyle">@style/CustomSearchView</item>
+        <item name="autoCompleteTextViewStyle">@style/CursorColor</item>
+    </style>
+
+    <!-- PopupWindow Animation-->
+    <style name="PopupAnimation">
+        <item name="android:windowEnterAnimation">@anim/fade_in_short</item>
+        <item name="android:windowExitAnimation">@anim/fade_out_short</item>
+    </style>
+
+    <!--SearchView-->
+    <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="searchIcon">@drawable/ic_search</item>
+        <item name="searchHintIcon">@null</item>
+        <item name="closeIcon">@drawable/ic_search_close</item>
+    </style>
+    <style name="CursorColor" parent="Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:textCursorDrawable">@drawable/cursor_color</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--Switch-->
+    <style name="CustomSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/colorTheme</item>
+    </style>
+
+</resources>

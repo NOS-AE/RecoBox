@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--带“开始使用”按钮的page-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:id="@+id/welcome_vp_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/wizard3"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:id="@+id/start_to_use_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="56dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_start_to_use"
+        android:alpha="0.9"
+        />
+
+</FrameLayout>

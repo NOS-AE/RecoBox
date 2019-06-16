@@ -1,0 +1,47 @@
+<resources>
+    <string name="file_provider_authority">org.fmod.racobox.fileprovider</string>
+
+    <string name="app_name">Racobox</string>
+
+    <string name="start_to_use">开始体验</string>
+    <string name="cloud_info">云盘可用空间 1.8MB/1.0GB</string>
+
+    <string name="default_nickname">点击头像登录</string>
+    <string name="default_cloud_content">开启全新的录音体验</string>
+
+    <string name="item1">我的云盘</string>
+    <string name="item2">联系团队</string>
+    <string name="item3">更多设置</string>
+    <string name="item4">帮助反馈</string>
+    <string name="title_activity_record_list">RecordListActivity</string>
+
+    <string name="list_title">我的录音</string>
+    <string name="menu_search">搜索</string>
+    <string name="search_hint">请输入文件/文件夹名</string>
+    <string name="popup1_hint1">请输入文件夹名称</string>
+    <string name="popup1_hint2">小于15个字</string>
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+    <string name="confirm_delete">确定要删除该录音吗</string>
+    <string name="new1">新建文件夹</string>
+    <string name="new2">新建录音</string>
+    <string name="new3">新建工程</string>
+    <string name="share_title">分享方式</string>
+    <string name="share1">发送给好友</string>
+    <string name="share2">发送到我的电脑</string>
+    <string name="share3">蓝牙</string>
+    <string name="share4">发送给朋友</string>
+    <string name="root">根目录</string>
+    <string name="move">移\t\t动</string>
+    <string name="qq_login">QQ登录</string>
+    <string name="qq_not_login">暂不登录</string>
+    <string name="phone_mode">听筒模式</string>
+    <string name="phone_mode_">默认使用听筒播放录音</string>
+    <string name="mute_when_ring">录音时来电静音</string>
+    <string name="mute_when_ring_">录音时将暂时关闭铃声</string>
+    <string name="rename_after_record">录音结束后重命名</string>
+    <string name="rename_after_record_">关闭后默认命名为新录音x</string>
+    <string name="exit_account">退出账号</string>
+    <string name="exit_account_">不会清除本地录音</string>
+
+</resources>

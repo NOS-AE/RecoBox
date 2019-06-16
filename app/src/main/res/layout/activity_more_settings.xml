@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/settings_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorTheme"
+        app:contentInsetStart="0dp"
+        android:elevation="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white_bg"
+            android:text="@string/item3"
+            android:textSize="16sp"
+            />
+
+        <ImageView
+            android:id="@+id/return_record"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/app_name"
+            android:padding="14dp"
+            android:src="@drawable/ic_return"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/set1_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/settings_toolbar"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        >
+
+        <TextView
+            android:id="@+id/set1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/phone_mode"
+            android:textSize="14sp"
+            android:textColor="@color/colorFont"
+            />
+
+        <TextView
+            android:id="@+id/set1_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/set1"
+            app:layout_constraintStart_toStartOf="@id/set1"
+            android:text="@string/phone_mode_"
+            android:textSize="12sp"
+            android:textColor="@color/colorRecordPressed"
+            />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/phone_mode_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/set1"
+            app:layout_constraintBottom_toBottomOf="@id/set1_"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:theme="@style/CustomSwitch"
+            android:checked="true"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/set2_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/set1_layout"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        >
+
+        <TextView
+            android:id="@+id/set2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/mute_when_ring"
+            android:textSize="14sp"
+            android:textColor="@color/colorFont"
+            />
+
+        <TextView
+            android:id="@+id/set2_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/set2"
+            app:layout_constraintStart_toStartOf="@id/set2"
+            android:text="@string/mute_when_ring_"
+            android:textSize="12sp"
+            android:textColor="@color/colorRecordPressed"
+            />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/mute_when_ring_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/set2"
+            app:layout_constraintBottom_toBottomOf="@id/set2_"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:theme="@style/CustomSwitch"
+            android:checked="true"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/set3_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/set2_layout"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        >
+
+        <TextView
+            android:id="@+id/set3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/rename_after_record"
+            android:textSize="14sp"
+            android:textColor="@color/colorFont"
+            />
+
+        <TextView
+            android:id="@+id/set3_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/set3"
+            app:layout_constraintStart_toStartOf="@id/set3"
+            android:text="@string/rename_after_record_"
+            android:textSize="12sp"
+            android:textColor="@color/colorRecordPressed"
+            />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/rename_after_record_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/set3"
+            app:layout_constraintBottom_toBottomOf="@id/set3_"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:theme="@style/CustomSwitch"
+            android:checked="true"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/exit_account_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/set3_layout"
+        android:paddingVertical="20dp"
+        android:paddingTop="20dp"
+        android:layout_marginTop="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/set4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/exit_account"
+            android:textSize="14sp"
+            android:textColor="@color/colorFont"
+            />
+
+        <TextView
+            android:id="@+id/set4_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/set3"
+            app:layout_constraintStart_toStartOf="@id/set3"
+            android:text="@string/exit_account_"
+            android:textSize="12sp"
+            android:textColor="@color/colorRecordPressed"
+            />
+
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<com.example.racobox.widget.LevelView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="32dp"
+    android:gravity="center_vertical|end"
+    android:textSize="14sp"
+    android:paddingEnd="20dp"
+    android:paddingStart="0dp"
+    />-->
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="32dp"
+    android:background="@drawable/level"
+    android:gravity="center"
+    android:text="@string/app_name"
+    android:textSize="16sp"
+    android:paddingHorizontal="100dp"
+    />

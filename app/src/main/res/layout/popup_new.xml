@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white_bg">
+
+    <ImageView
+        android:id="@+id/new2"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintStart_toEndOf="@id/new1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="25dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_new2"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/new2"
+        app:layout_constraintStart_toStartOf="@id/new2"
+        app:layout_constraintEnd_toEndOf="@id/new2"
+        android:layout_marginTop="16dp"
+        android:textSize="12sp"
+        android:text="@string/new2"/>
+
+    <ImageView
+        android:id="@+id/new1"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/new2"
+        app:layout_constraintTop_toTopOf="@id/new2"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_new1"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/new1"
+        app:layout_constraintStart_toStartOf="@id/new1"
+        app:layout_constraintEnd_toEndOf="@id/new1"
+        android:layout_marginTop="16dp"
+        android:textSize="12sp"
+        android:text="@string/new1"/>
+
+
+
+</android.support.constraint.ConstraintLayout>

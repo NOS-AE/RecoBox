@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/welcome_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"/>
+
+
+    <com.rd.PageIndicatorView
+        android:id="@+id/indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="20dp"
+        app:piv_viewPager="@id/welcome_vp"
+        app:piv_dynamicCount="true"
+        app:piv_animationType="none"
+        app:piv_selectedColor="@android:color/white"
+        app:piv_unselectedColor="@color/colorDotUnselected"
+        app:piv_radius="2dp"
+        app:piv_padding="12dp"
+        />
+
+</android.support.constraint.ConstraintLayout>

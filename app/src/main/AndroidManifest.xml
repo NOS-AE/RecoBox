@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="org.fmod.racobox">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+
+    <application
+        android:name="org.litepal.LitePalApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@drawable/ic_app_icon"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.RecordPlayActivity">
+        </activity> <!-- Activity -->
+        <activity android:name=".activity.CloudActivity">
+        </activity>
+        <activity android:name=".activity.MoreSettingsActivity">
+        </activity>
+        <activity
+            android:name=".activity.WizardActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/QQLoginTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity> <!-- Android9.0的QQ登录需要添加 -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"/>
+
+        <activity
+            android:name=".activity.QQLogin"
+            android:screenOrientation="portrait"
+            android:theme="@style/QQLoginTheme">
+        </activity>
+        <activity
+            android:name=".activity.RecordListActivity"
+            android:label="@string/title_activity_record_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+            android:name=".activity.WelcomeActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.RecordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/RecordActivityTheme">
+        </activity>
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <!-- 这地方需要用你在开放平台申请的appid:tencent+appid -->
+                <data android:scheme="tencent1109100996"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="behind"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/> <!-- Services -->
+        <service
+            android:name=".services.AudioService"
+            android:exported="false"/> <!-- File Provider -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="@string/file_provider_authority"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_path"/>
+        </provider>
+    </application>
+
+</manifest>
