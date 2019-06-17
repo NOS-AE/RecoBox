@@ -98,9 +98,9 @@ class FileUtil{
             fos?.close()
         }
 
-        fun setEncodeListener(listener: EncodeListener){
+        /*fun setEncodeListener(listener: EncodeListener){
             encodeListener = listener
-        }
+        }*/
 
         fun bytesToFile(data: ByteArray, filename: String){
             val fos = FileOutputStream("$soundAudioPath/$filename")

@@ -1,11 +1,7 @@
 package org.fmod.recobox.bean
 
-import com.google.gson.annotations.SerializedName
-import org.fmod.recobox.util.Util
 import org.litepal.annotation.Column
 import org.litepal.crud.LitePalSupport
-import java.util.*
-import kotlin.properties.Delegates
 
 //云端列表，本地列表
 
@@ -18,7 +14,6 @@ class MyFile: LitePalSupport(){
     var date = ""
     //录音时长（s）
     var duration = 0L
-    var durationString = "01:50:15"
     //文件大小
     var length = 0.0
     //备注

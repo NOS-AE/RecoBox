@@ -8,17 +8,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.graphics.Rect
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.support.v4.widget.DrawerLayout
 import android.util.Log
 import android.view.*
-import android.widget.EditText
 import android.widget.PopupWindow
 import android.widget.SimpleAdapter
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_record.*
 import kotlinx.android.synthetic.main.drawer_header.*
@@ -31,8 +28,6 @@ import org.fmod.recobox.manager.BackEndManager
 import org.fmod.recobox.manager.DatabaseManager
 import org.fmod.recobox.services.AudioService
 import org.fmod.recobox.util.AudioUtil
-import org.fmod.recobox.util.AudioUtilNative
-import org.fmod.recobox.util.FileUtil
 import org.fmod.recobox.util.Util
 import org.fmod.recobox.util.Util.Companion.dp2px
 import java.text.SimpleDateFormat
@@ -122,6 +117,10 @@ class RecordActivity : BaseActivity() {
             when(recordState){
                 R_RECORDING->{
                     time.text = Util.sec2Time(recordTime++)
+                    //限制录制时间30m
+                    if (recordTime > 3600){
+                        recordStop()
+                    }
                     recordHandler.postDelayed(recordThread,1000)
                 }
                 R_PAUSE->{

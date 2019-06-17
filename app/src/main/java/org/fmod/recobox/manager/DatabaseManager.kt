@@ -4,8 +4,6 @@ package org.fmod.recobox.manager
 import org.fmod.recobox.bean.MyFile
 import org.fmod.recobox.bean.MyFolder
 import org.litepal.LitePal
-import org.litepal.LitePal.order
-import org.litepal.extension.find
 
 //管理数据库，提供需要展示的数据，简化Activity的操作（数据库初始化位于WelcomeActivity）
 //异步即时获取数据

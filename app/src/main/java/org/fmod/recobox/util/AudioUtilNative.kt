@@ -14,7 +14,7 @@ class AudioUtilNative{
     //回收encoder
     external fun destroy()
     //计算sample频率
-    external fun processSampleData(buffer: ByteArray, sampleRate: Int): Double
+    //external fun processSampleData(buffer: ByteArray, sampleRate: Int): Double
     companion object {
         init {
             System.loadLibrary("native-lib")

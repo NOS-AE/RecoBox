@@ -152,11 +152,11 @@ class AudioUtil{
             }
         }
 
-        fun pauseMusic(){
+        /*fun pauseMusic(){
             Log.d(TAG,"pauseMusic")
             if(this::player.isInitialized && player.playState == AudioTrack.PLAYSTATE_PLAYING)
                 player.pause()
-        }
+        }*/
 
         fun stopMusic(){
             Log.d(TAG,"stopMusic")

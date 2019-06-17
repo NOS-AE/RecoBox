@@ -9,14 +9,12 @@ import android.os.Handler
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.view.WindowManager
-import kotlinx.android.synthetic.main.folder_item.*
 import org.fmod.recobox.R
 import org.fmod.recobox.bean.MyFile
 import org.fmod.recobox.bean.MyFolder
 import org.fmod.recobox.manager.ActivityManager
 import org.fmod.recobox.manager.BackEndManager
 import org.litepal.LitePal
-import org.litepal.crud.LitePalSupport
 import org.litepal.extension.delete
 
 //如为已登录，且有网络，则发起登录请求，如超时，则提示且不登录

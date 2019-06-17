@@ -7,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.folder_item.view.*
 import kotlinx.android.synthetic.main.record_item.view.*
-import okhttp3.internal.Util
 import org.fmod.recobox.R
 import org.fmod.recobox.ViewHolder
 import org.fmod.recobox.bean.MyFile
 import org.fmod.recobox.bean.MyFolder
-import org.fmod.recobox.widget.SlidingMenu
 
 class RecordListAdapter(
     private var mFolderList: ArrayList<MyFolder>,
@@ -30,7 +28,7 @@ class RecordListAdapter(
 
     private var listener: ItemClickListener? = null
     //打开侧滑菜单的item
-    private var menuOpenItem: SlidingMenu? = null
+    //private var menuOpenItem: SlidingMenu? = null
     //更多view的位置
     private var more = -1
 
@@ -135,7 +133,7 @@ class RecordListAdapter(
     /**
      * @return 是否允许其他操作
      */
-    private fun closeMoreAndSlide(): Boolean{
+    /*private fun closeMoreAndSlide(): Boolean{
         return when{
             more != -1->{
                 notifyItemRemoved(more)
@@ -148,7 +146,7 @@ class RecordListAdapter(
             }
             else -> true
         }
-    }
+    }*/
 
     interface ItemClickListener{
         /*Record Item*/

@@ -6,11 +6,6 @@ import org.litepal.crud.LitePalSupport
 //标记id统一为较早创建的id较小
 //数据库id最小为1，自定义id最小为0
 class MyFolder: LitePalSupport(){
-    companion object {
-        //下标为level，值为在在当前level中的id
-        @Column(ignore = true)
-        var levelIdList = ArrayList<Int>()
-    }
     @Column(unique = true)
     val id = 0L
     //上层文件夹id

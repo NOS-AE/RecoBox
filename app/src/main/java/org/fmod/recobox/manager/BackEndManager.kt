@@ -7,14 +7,9 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.*
 import org.fmod.recobox.bean.MyFile
-import org.fmod.recobox.util.FileUtil
 import org.json.JSONObject
 import java.io.*
-import java.security.MessageDigest
-import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
-import kotlin.text.StringBuilder
 
 //后端相关
 //QQ登录
@@ -35,7 +30,7 @@ class BackEndManager{
 
         private val JPG = MediaType.parse("application/x-jpg")
         private val JSON = MediaType.parse("application/json; charset=utf-8")
-        private val FILE = MediaType.parse("application/octet-stream")
+        //private val FILE = MediaType.parse("application/octet-stream")
 
         private val client = OkHttpClient()
         private val gson = Gson()
@@ -236,7 +231,6 @@ class BackEndManager{
                         Log.d(TAG,"getFileInfo successful: $status")
                         if(status == 200) {
                             val jsonArray = jsonObject.getJSONArray("data")
-                            val gson = Gson()
                             val fileList: ArrayList<MyFile> = gson.fromJson(jsonArray.toString())
                             fileInfoCallback?.onComplete(fileList)
                         }
@@ -305,9 +299,9 @@ class BackEndManager{
 
         /**
          * 上传文件
-         * @param files 一批文件的文件名
+         * //@param files 一批文件的文件名
          * */
-        fun uploadFiles(bean: MyFile){
+        /*fun uploadFiles(bean: MyFile){
             val file = File(FileUtil.soundAudioPath + "/${bean.filename}.pcm")
             val fileBody = RequestBody.create(FILE,file)
             val requestBody = MultipartBody.Builder()
@@ -337,7 +331,7 @@ class BackEndManager{
                     }
                 }
             })
-        }
+        }*/
 
 
         /*/**
@@ -386,15 +380,15 @@ class BackEndManager{
 
         /**
          * 将byteArray转字符串形式的16进制
-         * @param arr 要转成16进制字符串的byteArray
+         * //@param arr 要转成16进制字符串的byteArray
          * */
-        private fun bytes2Hex(arr: ByteArray): String{
+        /*private fun bytes2Hex(arr: ByteArray): String{
             val sb = StringBuilder()
             for(b in arr){
                 sb.append(String.format("%02x",b))
             }
             return sb.toString()
-        }
+        }*/
 
         private inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object: TypeToken<T>() {}.type)
 

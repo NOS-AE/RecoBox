@@ -1,8 +1,6 @@
 package org.fmod.recobox.util
 
 import android.content.res.Resources
-import java.text.SimpleDateFormat
-import java.util.*
 
 class Util{
     companion object {

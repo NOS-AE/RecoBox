@@ -2,11 +2,9 @@ package org.fmod.recobox.activity
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.media.AudioManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log

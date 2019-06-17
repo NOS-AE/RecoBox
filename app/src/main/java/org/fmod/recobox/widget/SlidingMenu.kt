@@ -53,9 +53,9 @@ class SlidingMenu(context: Context, attrs: AttributeSet): HorizontalScrollView(c
     }
 
     //外界调用，关闭侧滑菜单
-    fun closeMenu(){
+    /*fun closeMenu(){
         close()
-    }
+    }*/
 
     //关闭菜单
     private fun close(){

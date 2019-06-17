@@ -1,18 +1,14 @@
 package org.fmod.recobox.activity
 
 import android.annotation.SuppressLint
-import android.media.AudioTimestamp
 import android.os.Bundle
 import android.os.Handler
 import android.text.InputFilter
-import android.text.InputType
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.widget.EditText
 import android.widget.PopupWindow
-import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_record_list.*
 import kotlinx.android.synthetic.main.activity_record_play.*
 import kotlinx.android.synthetic.main.clip_layout.view.*
 import org.fmod.recobox.R
@@ -112,7 +108,7 @@ class RecordPlayActivity : BaseActivity() {
             isPlaying = !isPlaying
         }
 
-        play_progress.setOnTouchListener { v, event ->
+        play_progress.setOnTouchListener { _, event ->
             when(event.action){
                 MotionEvent.ACTION_DOWN -> {
                     AudioUtil.stopMusic()

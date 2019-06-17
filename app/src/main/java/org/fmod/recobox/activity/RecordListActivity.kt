@@ -1,33 +1,26 @@
 package org.fmod.recobox.activity
 
 import android.annotation.SuppressLint
-import android.app.backup.BackupManager
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.*
 import android.widget.*
-
 import kotlinx.android.synthetic.main.activity_record_list.*
 import kotlinx.android.synthetic.main.popup_change_name.view.*
 import org.fmod.recobox.R
-import org.fmod.recobox.adapter.LevelListAdapter
 import org.fmod.recobox.adapter.RecordListAdapter
 import org.fmod.recobox.bean.MyFile
 import org.fmod.recobox.bean.MyFolder
-import org.fmod.recobox.manager.BackEndManager
 import org.fmod.recobox.manager.DatabaseManager
 import org.fmod.recobox.util.FileUtil
 import org.fmod.recobox.util.Util.Companion.dp2px
-import org.litepal.LitePal
 import java.util.*
-import kotlin.math.log
 
 class RecordListActivity : BaseActivity() {
-    lateinit var popupManager: PopupWindowManager
+    private lateinit var popupManager: PopupWindowManager
 
-    lateinit var levelAdapter: LevelListAdapter
+    //lateinit var levelAdapter: LevelListAdapter
     lateinit var folderList: ArrayList<MyFolder>
     lateinit var recordList: ArrayList<MyFile>
 
@@ -127,12 +120,6 @@ class RecordListActivity : BaseActivity() {
         list_rv.adapter = listAdapter
     }
 
-
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return super.onOptionsItemSelected(item)
-    }
-
     /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu,menu)
         //在此处设置SearchView
@@ -226,8 +213,8 @@ class RecordListActivity : BaseActivity() {
         //用于新建选项
         //private val popupNew: PopupWindow
 
-        private var mBefore = ""
-        private var mId = 0
+        //private var mBefore = ""
+        //private var mId = 0
 
         //初始化popup
         init {
@@ -338,15 +325,15 @@ class RecordListActivity : BaseActivity() {
         /**
          *外部popup调用显示
          *更改名字popup
-         * @param before 更改前的名字
-         * @param id 被修改item在rv列表中的id
+         * //@param before 更改前的名字
+         * //@param id 被修改item在rv列表中的id
          */
-        fun showChangeNamePopup(before: String, id: Int){
+        /*fun showChangeNamePopup(before: String, id: Int){
             mBefore = before
             mId = id
             popupChangeName.showAtLocation(window.decorView,Gravity.CENTER,0,0)
             popupShadow(true)
-        }
+        }*/
 
         fun showNewFolderPopup(){
             popupNewFolder.showAtLocation(window.decorView,Gravity.CENTER,0,0)
@@ -354,9 +341,9 @@ class RecordListActivity : BaseActivity() {
         }
         /**
          * 确认删除popup
-         * @param id 被删除item在rv中的id
+         * //@param id 被删除item在rv中的id
          * */
-        fun showDeletePopup(id: Int){
+        /*fun showDeletePopup(id: Int){
             mId = id
             popupDelete.showAtLocation(window.decorView,Gravity.CENTER,0,0)
             popupShadow(true)
@@ -369,17 +356,17 @@ class RecordListActivity : BaseActivity() {
                 Gravity.CENTER_HORIZONTAL or Gravity.TOP,
                 0,dp2px(448f))
             popupShadow(true)*/
-        }
+        }*/
 
         /**
          * 分享popup
-         * @param id 被分享item在rv中的id
+         * /*@param id 被分享item在rv中的id
          */
         fun showSharePopup(id: Int){
             popupShare.showAtLocation(window.decorView,
                 Gravity.BOTTOM,0,0)
             popupShadow(true)
-        }
+        }*/
 
 
         //外界onDestroy时关闭popup，防止泄露

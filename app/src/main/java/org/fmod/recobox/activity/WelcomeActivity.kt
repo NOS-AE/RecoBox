@@ -5,7 +5,6 @@ import kotlinx.android.synthetic.main.activity_welcome.*
 import org.fmod.recobox.R
 import org.fmod.recobox.adapter.WelcomePagerAdapter
 import org.fmod.recobox.manager.ActivityManager
-//TODO 修复快速点击导致重复进入activity
 
 class WelcomeActivity : BaseActivity() {
 
