@@ -1,4 +1,4 @@
-package org.fmod.racobox.widget
+package org.fmod.recobox.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,8 +9,8 @@ import android.view.View
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.Toast
-import org.fmod.racobox.R
-import org.fmod.racobox.util.Util
+import org.fmod.recobox.R
+import org.fmod.recobox.util.Util
 
 //侧滑菜单控件，不可拓展，用于侧滑菜单实现和内部显示状态变化
 class SlidingMenu(context: Context, attrs: AttributeSet): HorizontalScrollView(context,attrs){

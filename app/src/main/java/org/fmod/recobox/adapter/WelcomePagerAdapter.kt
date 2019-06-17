@@ -1,4 +1,5 @@
-package org.fmod.racobox.adapter
+package org.fmod.recobox.adapter
+
 
 import android.animation.ObjectAnimator
 import android.content.Context
@@ -6,7 +7,7 @@ import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import org.fmod.racobox.R
+import org.fmod.recobox.R
 
 class WelcomePagerAdapter(private val mContext: Context): PagerAdapter(){
 

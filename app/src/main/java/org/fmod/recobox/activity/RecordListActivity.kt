@@ -1,4 +1,4 @@
-package org.fmod.racobox.activity
+package org.fmod.recobox.activity
 
 import android.annotation.SuppressLint
 import android.app.backup.BackupManager
@@ -11,15 +11,15 @@ import android.widget.*
 
 import kotlinx.android.synthetic.main.activity_record_list.*
 import kotlinx.android.synthetic.main.popup_change_name.view.*
-import org.fmod.racobox.R
-import org.fmod.racobox.adapter.LevelListAdapter
-import org.fmod.racobox.adapter.RecordListAdapter
-import org.fmod.racobox.bean.MyFile
-import org.fmod.racobox.bean.MyFolder
-import org.fmod.racobox.manager.BackEndManager
-import org.fmod.racobox.manager.DatabaseManager
-import org.fmod.racobox.util.FileUtil
-import org.fmod.racobox.util.Util.Companion.dp2px
+import org.fmod.recobox.R
+import org.fmod.recobox.adapter.LevelListAdapter
+import org.fmod.recobox.adapter.RecordListAdapter
+import org.fmod.recobox.bean.MyFile
+import org.fmod.recobox.bean.MyFolder
+import org.fmod.recobox.manager.BackEndManager
+import org.fmod.recobox.manager.DatabaseManager
+import org.fmod.recobox.util.FileUtil
+import org.fmod.recobox.util.Util.Companion.dp2px
 import org.litepal.LitePal
 import java.util.*
 import kotlin.math.log
@@ -94,8 +94,8 @@ class RecordListActivity : BaseActivity() {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
-            override fun clickMore() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            override fun clickMore(filename: String) {
+                FileUtil.shareFile(filename,this@RecordListActivity)
             }
 
             override fun clickPlayStop() {
@@ -126,6 +126,8 @@ class RecordListActivity : BaseActivity() {
         list_rv.layoutManager = verticalLayoutManager
         list_rv.adapter = listAdapter
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return super.onOptionsItemSelected(item)

@@ -1,7 +1,8 @@
-package org.fmod.racobox.manager
+package org.fmod.recobox.manager
 
-import org.fmod.racobox.bean.MyFile
-import org.fmod.racobox.bean.MyFolder
+
+import org.fmod.recobox.bean.MyFile
+import org.fmod.recobox.bean.MyFolder
 import org.litepal.LitePal
 import org.litepal.LitePal.order
 import org.litepal.extension.find

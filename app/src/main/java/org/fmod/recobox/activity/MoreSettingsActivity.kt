@@ -1,4 +1,4 @@
-package org.fmod.racobox.activity
+package org.fmod.recobox.activity
 
 import android.app.NotificationManager
 import android.content.Context
@@ -12,8 +12,8 @@ import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_more_settings.*
-import org.fmod.racobox.R
-import org.fmod.racobox.manager.ActivityManager
+import org.fmod.recobox.R
+import org.fmod.recobox.manager.ActivityManager
 
 class MoreSettingsActivity : BaseActivity() {
 

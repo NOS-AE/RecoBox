@@ -1,4 +1,4 @@
-package org.fmod.racobox.adapter
+package org.fmod.recobox.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.folder_item.view.*
 import kotlinx.android.synthetic.main.record_item.view.*
 import okhttp3.internal.Util
-import org.fmod.racobox.R
-import org.fmod.racobox.ViewHolder
-import org.fmod.racobox.bean.MyFile
-import org.fmod.racobox.bean.MyFolder
-import org.fmod.racobox.widget.SlidingMenu
+import org.fmod.recobox.R
+import org.fmod.recobox.ViewHolder
+import org.fmod.recobox.bean.MyFile
+import org.fmod.recobox.bean.MyFolder
+import org.fmod.recobox.widget.SlidingMenu
 
 class RecordListAdapter(
     private var mFolderList: ArrayList<MyFolder>,
@@ -82,12 +82,13 @@ class RecordListAdapter(
             }
             VIEW_TYPE_FILE->{
                 v.record_more.setOnClickListener {
-                    if(closeMoreAndSlide()){
+                    /*if(closeMoreAndSlide()){
                         //TODO 添加更多item
                         more = p1 + 1
                         notifyItemInserted(more)
 
-                    }
+                    }*/
+                    listener?.clickMore(mRecordList[p1 - mFolderList.size].filename)
                 }
                 v.record_main_item.setOnClickListener{
                     val bean = mRecordList[p1 - mFolderList.size]
@@ -95,7 +96,7 @@ class RecordListAdapter(
                     listener?.clickItem(bean.filename,bean.duration,bean.description)
                 }
                 v.file_name.text = mRecordList[p1 - mFolderList.size].filename
-                v.file_info.text = org.fmod.racobox.util.Util.sec2Time(mRecordList[p1 - mFolderList.size].duration)
+                v.file_info.text = org.fmod.recobox.util.Util.sec2Time(mRecordList[p1 - mFolderList.size].duration)
             }
         }
     }
@@ -156,7 +157,7 @@ class RecordListAdapter(
         //播放/停止
         fun clickPlayStop()
         //更多
-        fun clickMore()
+        fun clickMore(filename: String)
         /*Record Item侧滑菜单*/
         //删除
         fun clickRecordDelete()

@@ -8,7 +8,7 @@
 Mp3Encoder *encoder = nullptr;
 
 extern "C"
-JNIEXPORT jint JNICALL Java_org_fmod_racobox_util_AudioUtilNative_init(
+JNIEXPORT jint JNICALL Java_org_fmod_recobox_util_AudioUtilNative_init(
         JNIEnv *env,
         jobject,
         jstring pcmPathParam,
@@ -31,13 +31,13 @@ JNIEXPORT jint JNICALL Java_org_fmod_racobox_util_AudioUtilNative_init(
 }
 
 extern "C"
-JNIEXPORT void JNICALL Java_org_fmod_racobox_util_AudioUtilNative_encode
+JNIEXPORT void JNICALL Java_org_fmod_recobox_util_AudioUtilNative_encode
         (JNIEnv *, jobject){
     encoder->Encode();
 }
 
 extern "C"
-JNIEXPORT void JNICALL Java_org_fmod_racobox_util_AudioUtilNative_destroy
+JNIEXPORT void JNICALL Java_org_fmod_recobox_util_AudioUtilNative_destroy
         (JNIEnv *, jobject){
     encoder->Destory();
 }

@@ -1,4 +1,4 @@
-package org.fmod.racobox.decor
+package org.fmod.recobox.decor
 
 import android.content.res.Resources
 import android.graphics.Rect

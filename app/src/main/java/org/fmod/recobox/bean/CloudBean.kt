@@ -1,4 +1,4 @@
-package org.fmod.racobox.bean
+package org.fmod.recobox.bean
 
 import com.google.gson.annotations.SerializedName
 

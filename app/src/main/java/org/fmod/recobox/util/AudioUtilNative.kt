@@ -1,4 +1,4 @@
-package org.fmod.racobox.util
+package org.fmod.recobox.util
 
 //转码，计算频率
 class AudioUtilNative{

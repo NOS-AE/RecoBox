@@ -1,10 +1,10 @@
-package org.fmod.racobox.activity
+package org.fmod.recobox.activity
 
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_welcome.*
-import org.fmod.racobox.R
-import org.fmod.racobox.adapter.WelcomePagerAdapter
-import org.fmod.racobox.manager.ActivityManager
+import org.fmod.recobox.R
+import org.fmod.recobox.adapter.WelcomePagerAdapter
+import org.fmod.recobox.manager.ActivityManager
 //TODO 修复快速点击导致重复进入activity
 
 class WelcomeActivity : BaseActivity() {

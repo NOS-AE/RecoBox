@@ -1,13 +1,13 @@
-package org.fmod.racobox.manager
+package org.fmod.recobox.manager
+
 
 import android.os.Environment
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.*
-import org.fmod.racobox.bean.CloudBean
-import org.fmod.racobox.bean.MyFile
-import org.fmod.racobox.util.FileUtil
+import org.fmod.recobox.bean.MyFile
+import org.fmod.recobox.util.FileUtil
 import org.json.JSONObject
 import java.io.*
 import java.security.MessageDigest

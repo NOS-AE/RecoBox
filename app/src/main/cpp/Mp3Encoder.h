@@ -12,7 +12,7 @@
 extern "C"{
 #endif
 
-JNIEXPORT jint JNICALL Java_org_fmod_racobox_util_AudioUtilNative_init
+JNIEXPORT jint JNICALL Java_org_fmod_recobox_util_AudioUtilNative_init
         (JNIEnv *, jobject, jstring, jint, jint, jint, jstring);
 
 /*
@@ -20,7 +20,7 @@ JNIEXPORT jint JNICALL Java_org_fmod_racobox_util_AudioUtilNative_init
  * Method:    encode
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_fmod_racobox_util_AudioUtilNative_encode
+JNIEXPORT void JNICALL Java_org_fmod_recobox_util_AudioUtilNative_encode
 (JNIEnv *, jobject);
 
 /*
@@ -28,7 +28,7 @@ JNIEXPORT void JNICALL Java_org_fmod_racobox_util_AudioUtilNative_encode
  * Method:    destroy
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_fmod_racobox_util_AudioUtilNative_destroy
+JNIEXPORT void JNICALL Java_org_fmod_recobox_util_AudioUtilNative_destroy
 (JNIEnv *, jobject);
 
 

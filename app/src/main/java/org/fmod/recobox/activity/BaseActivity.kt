@@ -1,4 +1,4 @@
-package org.fmod.racobox.activity
+package org.fmod.recobox.activity
 
 import android.content.Context
 import android.content.Intent
@@ -11,8 +11,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
-import org.fmod.racobox.R
-import org.fmod.racobox.bean.MyFolder
+import org.fmod.recobox.R
+import org.fmod.recobox.bean.MyFolder
 
 abstract class BaseActivity: AppCompatActivity(){
     companion object {

@@ -1,4 +1,4 @@
-package org.fmod.racobox.activity
+package org.fmod.recobox.activity
 
 import android.annotation.SuppressLint
 import android.media.AudioTimestamp
@@ -15,9 +15,9 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_record_list.*
 import kotlinx.android.synthetic.main.activity_record_play.*
 import kotlinx.android.synthetic.main.clip_layout.view.*
-import org.fmod.racobox.R
-import org.fmod.racobox.util.AudioUtil
-import org.fmod.racobox.util.Util
+import org.fmod.recobox.R
+import org.fmod.recobox.util.AudioUtil
+import org.fmod.recobox.util.Util
 import kotlin.concurrent.thread
 
 class RecordPlayActivity : BaseActivity() {

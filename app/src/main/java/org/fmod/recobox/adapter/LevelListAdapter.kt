@@ -1,4 +1,4 @@
-package org.fmod.racobox.adapter
+package org.fmod.recobox.adapter
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import org.fmod.racobox.R
-import org.fmod.racobox.ViewHolder
+import org.fmod.recobox.R
+import org.fmod.recobox.ViewHolder
 
 class LevelListAdapter(private var mList: ArrayList<String>, private val context:Context): RecyclerView.Adapter<ViewHolder>(){
 

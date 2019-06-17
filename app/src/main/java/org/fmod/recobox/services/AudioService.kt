@@ -1,4 +1,4 @@
-package org.fmod.racobox.services
+package org.fmod.recobox.services
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -10,8 +10,8 @@ import android.os.Binder
 import android.os.IBinder
 import android.support.v4.app.NotificationCompat
 import android.util.Log
-import org.fmod.racobox.R
-import org.fmod.racobox.util.AudioUtil
+import org.fmod.recobox.R
+import org.fmod.recobox.util.AudioUtil
 
 class AudioService: Service(){
 

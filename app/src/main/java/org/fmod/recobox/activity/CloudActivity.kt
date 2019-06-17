@@ -1,4 +1,4 @@
-package org.fmod.racobox.activity
+package org.fmod.recobox.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -8,11 +8,11 @@ import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import kotlinx.android.synthetic.main.activity_cloud.*
-import org.fmod.racobox.R
-import org.fmod.racobox.adapter.CloudListAdapter
-import org.fmod.racobox.bean.MyFile
-import org.fmod.racobox.manager.BackEndManager
-import org.fmod.racobox.util.FileUtil
+import org.fmod.recobox.R
+import org.fmod.recobox.adapter.CloudListAdapter
+import org.fmod.recobox.bean.MyFile
+import org.fmod.recobox.manager.BackEndManager
+import org.fmod.recobox.util.FileUtil
 
 class CloudActivity : BaseActivity() {
     private lateinit var progress: ProgressBar

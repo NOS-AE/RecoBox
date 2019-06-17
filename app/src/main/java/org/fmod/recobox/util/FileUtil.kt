@@ -1,4 +1,4 @@
-package org.fmod.racobox.util
+package org.fmod.recobox.util
 
 import android.content.Context
 import android.content.Intent

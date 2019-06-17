@@ -1,4 +1,4 @@
-package org.fmod.racobox.bean
+package org.fmod.recobox.bean
 
 import org.litepal.annotation.Column
 import org.litepal.crud.LitePalSupport

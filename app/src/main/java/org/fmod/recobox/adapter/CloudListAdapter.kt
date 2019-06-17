@@ -1,4 +1,4 @@
-package org.fmod.racobox.adapter
+package org.fmod.recobox.adapter
 
 import android.content.res.Resources
 import android.support.v7.widget.RecyclerView
@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.cloud_item_layout.view.*
 import kotlinx.android.synthetic.main.cloud_layout.view.*
-import org.fmod.racobox.R
-import org.fmod.racobox.ViewHolder
-import org.fmod.racobox.bean.MyFile
+import org.fmod.recobox.R
+import org.fmod.recobox.ViewHolder
+import org.fmod.recobox.bean.MyFile
 
 class CloudListAdapter(
     private var mList: ArrayList<MyFile>,

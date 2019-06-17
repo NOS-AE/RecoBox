@@ -1,7 +1,7 @@
-package org.fmod.racobox.bean
+package org.fmod.recobox.bean
 
 import com.google.gson.annotations.SerializedName
-import org.fmod.racobox.util.Util
+import org.fmod.recobox.util.Util
 import org.litepal.annotation.Column
 import org.litepal.crud.LitePalSupport
 import java.util.*

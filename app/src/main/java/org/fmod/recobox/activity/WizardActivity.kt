@@ -1,5 +1,4 @@
-package org.fmod.racobox.activity
-
+package org.fmod.recobox.activity
 import android.Manifest
 import android.content.Context
 import android.content.Intent
@@ -11,11 +10,11 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.view.WindowManager
 import kotlinx.android.synthetic.main.folder_item.*
-import org.fmod.racobox.R
-import org.fmod.racobox.bean.MyFile
-import org.fmod.racobox.bean.MyFolder
-import org.fmod.racobox.manager.ActivityManager
-import org.fmod.racobox.manager.BackEndManager
+import org.fmod.recobox.R
+import org.fmod.recobox.bean.MyFile
+import org.fmod.recobox.bean.MyFolder
+import org.fmod.recobox.manager.ActivityManager
+import org.fmod.recobox.manager.BackEndManager
 import org.litepal.LitePal
 import org.litepal.crud.LitePalSupport
 import org.litepal.extension.delete

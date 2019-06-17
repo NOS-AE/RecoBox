@@ -1,7 +1,7 @@
-package org.fmod.racobox.manager
+package org.fmod.recobox.manager
 
 import android.app.Activity
-import org.fmod.racobox.activity.*
+import org.fmod.recobox.activity.*
 
 class ActivityManager{
     companion object {

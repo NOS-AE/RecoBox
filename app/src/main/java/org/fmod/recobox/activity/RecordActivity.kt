@@ -1,4 +1,4 @@
-package org.fmod.racobox.activity
+package org.fmod.recobox.activity
 
 import android.animation.AnimatorInflater
 import android.animation.ObjectAnimator
@@ -23,18 +23,18 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_record.*
 import kotlinx.android.synthetic.main.drawer_header.*
 import kotlinx.android.synthetic.main.popup_change_name.view.*
-import org.fmod.racobox.R
-import org.fmod.racobox.bean.MyFile
-import org.fmod.racobox.bean.MyFolder
-import org.fmod.racobox.manager.ActivityManager
-import org.fmod.racobox.manager.BackEndManager
-import org.fmod.racobox.manager.DatabaseManager
-import org.fmod.racobox.services.AudioService
-import org.fmod.racobox.util.AudioUtil
-import org.fmod.racobox.util.AudioUtilNative
-import org.fmod.racobox.util.FileUtil
-import org.fmod.racobox.util.Util
-import org.fmod.racobox.util.Util.Companion.dp2px
+import org.fmod.recobox.R
+import org.fmod.recobox.bean.MyFile
+import org.fmod.recobox.bean.MyFolder
+import org.fmod.recobox.manager.ActivityManager
+import org.fmod.recobox.manager.BackEndManager
+import org.fmod.recobox.manager.DatabaseManager
+import org.fmod.recobox.services.AudioService
+import org.fmod.recobox.util.AudioUtil
+import org.fmod.recobox.util.AudioUtilNative
+import org.fmod.recobox.util.FileUtil
+import org.fmod.recobox.util.Util
+import org.fmod.recobox.util.Util.Companion.dp2px
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -255,12 +255,12 @@ class RecordActivity : BaseActivity() {
         //view.findViewById<TextView>(R.id.hint1).text = "新昵称"
         view.hint1.text = "重命名"
         view.cancel_change_name.setOnClickListener {
-            editFilenamePopup.dismiss()
             isConfirmRename = false
+            editFilenamePopup.dismiss()
         }
         view.confirm_change_name.setOnClickListener {
-            editFilenamePopup.dismiss()
             isConfirmRename = true
+            editFilenamePopup.dismiss()
         }
 
 
