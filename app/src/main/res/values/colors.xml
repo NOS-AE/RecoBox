@@ -10,7 +10,7 @@
     <color name="white">#FFF</color>
     <color name="colorCursor">#aFFF</color>
     <color name="colorHint">#6FFF</color>
-    <color name="colorFont">#373737</color>
+    <color name="colorFont">#FF373737</color>
     <color name="colorRecordUnpressed">#c8c8c8</color>
     <color name="colorRecordPressed">#888888</color>
     <color name="colorSyncUnpressed">#ddd</color>

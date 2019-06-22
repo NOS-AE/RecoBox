@@ -82,6 +82,11 @@ class RecordPlayActivity : BaseActivity() {
     private fun setListener(){
         record_play_speaker_earpiece_switch.setOnClickListener {
             setSpeakerOn()
+            if(isSpeaker){
+                record_play_speaker_earpiece_switch.setImageResource(R.drawable.ic_speaker_black)
+            }else{
+                record_play_speaker_earpiece_switch.setImageResource(R.drawable.ic_earpiece_black)
+            }
         }
 
         edit_description.setOnClickListener {

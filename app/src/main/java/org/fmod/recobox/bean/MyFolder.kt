@@ -8,6 +8,8 @@ import org.litepal.crud.LitePalSupport
 class MyFolder: LitePalSupport(){
     @Column(unique = true)
     val id = 0L
+    @Column(ignore = true)
+    var isCheck = false
     //上层文件夹id
     var parentId = 0L
     //文件夹名

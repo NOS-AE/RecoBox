@@ -50,7 +50,7 @@
             android:name=".activity.RecordListActivity"
             android:label="@string/title_activity_record_list"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/RecordListActivityTheme"
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity

@@ -44,4 +44,6 @@
     <string name="exit_account">退出账号</string>
     <string name="exit_account_">不会清除本地录音</string>
 
+    <string name="check_title">已选择1个</string>
+
 </resources>

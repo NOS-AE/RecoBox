@@ -34,6 +34,11 @@
     </style>
 
     <!-- RecordListActivity -->
+    <style name="RecordListActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <!-- RecordListActivity -->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

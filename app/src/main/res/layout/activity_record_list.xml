@@ -12,12 +12,14 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="@color/colorTheme"
         app:contentInsetStart="0dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="@style/ThemeOverlay.AppCompat.Light"
-        android:elevation="10dp">
+        android:elevation="5dp"
+        android:fitsSystemWindows="true"
+        >
 
         <ImageView
             android:id="@+id/return_record_list"
@@ -30,6 +32,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"/>
 
         <TextView
+            android:id="@+id/record_list_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -49,49 +52,42 @@
             android:clickable="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             />
-        
-
     </android.support.v7.widget.Toolbar>
 
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.constraint.ConstraintLayout
+    <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/level_rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorSlideEdit"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="gone"
-                />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/level_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorSlideEdit"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
+            />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/list_rv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/level_rv"
-                />
-            
-            <TextView
-                android:id="@+id/move_confirm"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:textColor="@color/white"
-                android:background="@color/colorTheme"
-                android:gravity="center"
-                android:text="@string/move"
-                android:visibility="invisible"
-                />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/level_rv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 
-        </android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/move_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/white"
+            android:background="@color/colorTheme"
+            android:gravity="center"
+            android:text="@string/move"
+            android:visibility="gone"
+            />
+
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
@@ -100,11 +96,17 @@
             android:layout_gravity="bottom|end"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_goneMarginEnd="16dp"
+            app:layout_goneMarginBottom="16dp"
             android:backgroundTint="@color/colorTheme"
+            android:elevation="10dp"
+            app:borderWidth="0dp"
             android:src="@drawable/ic_add"
             />
 
-    </FrameLayout>
+    </android.support.constraint.ConstraintLayout>
 
 
 </LinearLayout>

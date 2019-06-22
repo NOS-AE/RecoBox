@@ -67,6 +67,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:contentDescription="@string/app_name"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/more_bg"
                 android:layout_marginEnd="10dp"
                 android:clickable="true"

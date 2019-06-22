@@ -8,7 +8,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
-import android.widget.Toast
 import org.fmod.recobox.R
 import org.fmod.recobox.util.Util
 
@@ -27,8 +26,10 @@ class SlidingMenu(context: Context, attrs: AttributeSet): HorizontalScrollView(c
         mMenuWidth = Util.dp2px(if(isFolder) w else w*3)//根据ui提供的数据
     }
 
+    private var listener: OnOpenListener? = null
+
     companion object {
-        private var isCheck = false
+        private var checkState = false
         private const val w = 56f
     }
 
@@ -48,18 +49,36 @@ class SlidingMenu(context: Context, attrs: AttributeSet): HorizontalScrollView(c
         closeWidth = openWidth * 2
         overScrollMode = View.OVER_SCROLL_NEVER
         isHorizontalScrollBarEnabled = false
-
         setOnTouch()
     }
 
+    fun setOnOpenListener(listener: OnOpenListener){
+        this.listener = listener
+    }
+
     //外界调用，关闭侧滑菜单
-    /*fun closeMenu(){
-        close()
-    }*/
+    fun closeMenu(){
+        if(isOpen) {
+            close()
+        }
+    }
+
+    //外界调用，打开侧滑菜单
+    fun openMenu(){
+        if(!isOpen){
+            open()
+        }
+    }
 
     //关闭菜单
     private fun close(){
-        smoothScrollTo(0,0)
+        smoothScrollTo(0, 0)
+        isOpen = false
+    }
+
+    //不带动画的关闭菜单
+    fun shut(){
+        scrollTo(0,0)
         isOpen = false
     }
 
@@ -67,6 +86,7 @@ class SlidingMenu(context: Context, attrs: AttributeSet): HorizontalScrollView(c
     private fun open(){
         smoothScrollTo(mMenuWidth,0)
         isOpen = true
+        listener?.onOpen(this)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -75,7 +95,7 @@ class SlidingMenu(context: Context, attrs: AttributeSet): HorizontalScrollView(c
             when(event.action) {
                 MotionEvent.ACTION_UP -> {
                     //关闭和打开侧滑菜单
-                    if(!isCheck) {
+                    if(!checkState) {
                         if (isOpen && v.scrollX < closeWidth ||
                             !isOpen && v.scrollX < openWidth
                         ) {
@@ -108,13 +128,13 @@ class SlidingMenu(context: Context, attrs: AttributeSet): HorizontalScrollView(c
             //此处限制item宽度为屏幕大小
             wrapper.getChildAt(0).layoutParams.width = mScreenWidth//RecyclerView Item宽度
             //长按item事件
-            wrapper.getChildAt(0).setOnLongClickListener {
-                if(!isCheck && !isOpen) {
+            /*wrapper.getChildAt(0).setOnLongClickListener {
+                if(!checkState && !isOpen) {
                     Toast.makeText(context, "LongPress", Toast.LENGTH_SHORT).show()
-                    isCheck = true
+                    checkState = true
                 }
                 true
-            }
+            }*/
             once = false
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -142,4 +162,8 @@ class SlidingMenu(context: Context, attrs: AttributeSet): HorizontalScrollView(c
         //不拦截其它事件
         return false
     }*/
+
+    interface OnOpenListener{
+        fun onOpen(v: View)
+    }
 }

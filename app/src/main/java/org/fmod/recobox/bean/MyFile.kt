@@ -10,6 +10,8 @@ class MyFile: LitePalSupport(){
     var id = 0L
     @Column(unique = true)
     var filename = ""
+    @Column(ignore = true)
+    var isCheck = false
     //文件创建日期和时间（精确到分）
     var date = ""
     //录音时长（s）

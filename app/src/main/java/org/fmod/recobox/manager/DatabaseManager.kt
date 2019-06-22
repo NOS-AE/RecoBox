@@ -3,7 +3,10 @@ package org.fmod.recobox.manager
 
 import org.fmod.recobox.bean.MyFile
 import org.fmod.recobox.bean.MyFolder
+import org.fmod.recobox.util.FileUtil
 import org.litepal.LitePal
+import org.litepal.extension.delete
+import kotlin.concurrent.thread
 
 //管理数据库，提供需要展示的数据，简化Activity的操作（数据库初始化位于WelcomeActivity）
 //异步即时获取数据
@@ -29,7 +32,6 @@ class DatabaseManager{
             LitePal.findAsync(MyFolder::class.java, parentId,true).listen {
                 folder = it
                 if(isAnotherFind){
-
                     mCallBack?.onFind(folder, folderList)
                 }
                 isAnotherFind = !isAnotherFind
@@ -66,7 +68,7 @@ class DatabaseManager{
         }
 
         fun findStarFile(){
-            LitePal.where("star = ?", "1")
+            LitePal.where("star = 1")
                 .findAsync(MyFile::class.java).listen {
                     mCallBack?.onFindStarFiles(it as ArrayList<MyFile>)
                 }
@@ -74,6 +76,43 @@ class DatabaseManager{
 
         fun findRootFolder(): MyFolder{
             return LitePal.find(MyFolder::class.java,1,true)
+        }
+
+        //删除数据库中文件，包括真实文件
+        fun deleteFile(bean: MyFile){
+            FileUtil.deleteFile(bean.filename)
+            LitePal.delete(MyFile::class.java, bean.id)
+        }
+
+        //删除数据库中文件夹，包括record和subfolder，和真实文件
+        fun deleteFolder(id: Long){
+            thread {
+                FileUtil.deleteFiles(LitePal.select("filename")
+                    .where("myfolder_id = $id")
+                    .find(MyFile::class.java) as ArrayList<MyFile>)
+                deleteSubfolder(id)
+                LitePal.delete<MyFolder>(id)
+            }
+        }
+
+        //删除当前目录下的子目录
+        /**
+         * @param parentId 父目录id
+         * */
+        private fun deleteSubfolder(parentId: Long){
+            //删除parentId下的真实文件
+            FileUtil.deleteFiles(LitePal.select("filename")
+                .where("myfolder_id = $parentId")
+                .find(MyFile::class.java) as ArrayList<MyFile>)
+            //寻找parentId下的子目录并删除
+            LitePal.where("parentId = $parentId")
+                .findAsync(MyFolder::class.java)
+                .listen {
+                    for(i in it){
+                        deleteSubfolder(i.id)
+                    }
+                    LitePal.delete<MyFolder>(parentId)
+                }
         }
 
         fun setOnFindCallback(callBack: FindCallBack){

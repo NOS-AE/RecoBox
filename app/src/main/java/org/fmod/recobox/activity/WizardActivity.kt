@@ -14,6 +14,7 @@ import org.fmod.recobox.bean.MyFile
 import org.fmod.recobox.bean.MyFolder
 import org.fmod.recobox.manager.ActivityManager
 import org.fmod.recobox.manager.BackEndManager
+import org.fmod.recobox.util.FileUtil
 import org.litepal.LitePal
 import org.litepal.extension.delete
 
@@ -34,6 +35,7 @@ class WizardActivity : BaseActivity() {
 
         ActivityManager.add(this)
 
+        FileUtil.deleteTempMp3()
         getDataFromSp()
         askPermissions()
 

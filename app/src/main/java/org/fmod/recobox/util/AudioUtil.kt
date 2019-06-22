@@ -4,7 +4,6 @@ import android.media.*
 import android.util.Log
 import org.fmod.recobox.util.FileUtil.Companion.soundAudioPath
 import org.fmod.recobox.util.FileUtil.Companion.tempAudioPath
-import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import kotlin.concurrent.thread
@@ -160,7 +159,7 @@ class AudioUtil{
 
         fun stopMusic(){
             Log.d(TAG,"stopMusic")
-            if(this::player.isInitialized && player.playState != AudioTrack.PLAYSTATE_PLAYING)
+            if(this::player.isInitialized && player.playState != AudioTrack.PLAYSTATE_PAUSED)
                 player.stop()
         }
 

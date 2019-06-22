@@ -8,13 +8,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:id="@+id/folder_main_item"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:clickable="true"
+        >
 
         <!--Item布局-->
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/folder_main_item"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 

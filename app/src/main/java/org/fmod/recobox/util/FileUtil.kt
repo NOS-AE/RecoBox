@@ -3,9 +3,11 @@ package org.fmod.recobox.util
 import android.content.Context
 import android.content.Intent
 import android.media.MediaMetadataRetriever
+import android.net.Uri
 import android.os.Environment
 import android.support.v4.content.FileProvider
 import android.util.Log
+import org.fmod.recobox.bean.MyFile
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -21,7 +23,7 @@ class FileUtil{
         private val tempMp3Path = "$appPath/tempMp3"
 
         private const val SHARE_AUTHORITY = "org.fmod.racobox.fileprovider"
-        private lateinit var encodeListener: EncodeListener
+        private var encodeListener: EncodeListener? = null
 
         init {
             //创立文件夹
@@ -44,8 +46,7 @@ class FileUtil{
                 //转码成mp3，需要一定时间，开启线程，完成后回调
                 val mp3File = "$tempMp3Path/$filename.mp3"
                 AudioUtil.pcmToMp3("$soundAudioPath/$filename.pcm",mp3File)
-                if(this::encodeListener.isInitialized)
-                    encodeListener.onComplete()
+                encodeListener?.onComplete()
                 //分享文件
                 val file = File(mp3File)
                 val share = Intent(Intent.ACTION_SEND)
@@ -55,6 +56,35 @@ class FileUtil{
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     context.startActivity(Intent.createChooser(share,"分享文件"))
+                }
+            }
+        }
+
+        fun shareMultiFile(nameList: ArrayList<String>, context: Context){
+            thread {
+                var mp3File: String
+
+                //转码成MP3
+                val uriList = ArrayList<Uri>()
+                for (i in nameList) {
+                    mp3File ="$tempMp3Path/$i.mp3"
+                    AudioUtil.pcmToMp3(
+                        "$soundAudioPath/$i.pcm",
+                        mp3File
+                    )
+                    uriList.add(FileProvider.getUriForFile(context, SHARE_AUTHORITY, File(mp3File)))
+                }
+                encodeListener?.onComplete()
+
+                val minType = getMinType("$tempMp3Path/${nameList[0]}.mp3")
+                //分享文件
+                val share = Intent(Intent.ACTION_SEND_MULTIPLE)
+                share.run {
+                    type = minType
+                    putParcelableArrayListExtra(Intent.EXTRA_STREAM,uriList)
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    context.startActivity(Intent.createChooser(this,"分享文件"))
                 }
             }
         }
@@ -96,6 +126,34 @@ class FileUtil{
                 file.delete()
             }
             fos?.close()
+        }
+
+        fun deleteFiles(fileList: ArrayList<MyFile>){
+            var file: File
+            for(i in fileList){
+                file = File("$soundAudioPath/${i.filename}.pcm")
+                if(file.exists()){
+                    file.delete()
+                }
+            }
+        }
+
+        fun deleteFile(filename: String){
+            val file = File("$soundAudioPath/$filename.pcm")
+            if (file.exists())
+                file.delete()
+        }
+
+        fun deleteTempMp3(){
+            val file = File(tempMp3Path)
+            val list = file.listFiles()
+            for(i in list){
+                i.delete()
+            }
+        }
+
+        fun setOnEncodeListener(listener: EncodeListener){
+            encodeListener = listener
         }
 
         /*fun setEncodeListener(listener: EncodeListener){
