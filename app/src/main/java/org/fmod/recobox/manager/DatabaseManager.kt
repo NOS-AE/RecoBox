@@ -1,6 +1,7 @@
 package org.fmod.recobox.manager
 
 
+import android.util.Log
 import org.fmod.recobox.bean.MyFile
 import org.fmod.recobox.bean.MyFolder
 import org.fmod.recobox.util.FileUtil
@@ -26,10 +27,11 @@ class DatabaseManager{
          * 被包含文件夹不加载关联表
          * @param parentId 父目录id
          * */
-        fun findCurrentList(parentId: Long){
+        fun findCurrentList(parentId: Long, findFile: Boolean){
             //开始查询
             // 加载当前目录，获取文件关联表
-            LitePal.findAsync(MyFolder::class.java, parentId,true).listen {
+            Log.d("MyApp",parentId.toString())
+            LitePal.findAsync(MyFolder::class.java, parentId,findFile).listen {
                 folder = it
                 if(isAnotherFind){
                     mCallBack?.onFind(folder, folderList)
@@ -46,25 +48,6 @@ class DatabaseManager{
                     }
                     isAnotherFind = !isAnotherFind
                 }
-            /*LitePal.where("level = ?", "$level")
-                .where("levelId = ?","$levelId")
-                .findAsync(MyFolder::class.java,true).listen {
-                    if(it.isNotEmpty()) {
-                        folderList.add(it[0])//level和levelId确定一个folder
-                    }
-                    if (isAnotherFind) {
-                        mCallBack?.onFind(folderList)
-                    }
-                    isAnotherFind = !isAnotherFind
-                }
-            LitePal.where("level = ?","${level + 1}")
-                .findAsync(MyFolder::class.java).listen {
-                    folderList.addAll(0,it)//folder列表添加到最前面
-                    if(isAnotherFind){
-                        mCallBack?.onFind(folderList)
-                    }
-                    isAnotherFind = !isAnotherFind
-                }*/
         }
 
         fun findStarFile(){
@@ -82,6 +65,15 @@ class DatabaseManager{
         fun deleteFile(bean: MyFile){
             FileUtil.deleteFile(bean.filename)
             LitePal.delete(MyFile::class.java, bean.id)
+        }
+
+        fun deleteFiles(list: ArrayList<MyFile>){
+            FileUtil.deleteFiles(list)
+            for(i in list){
+                if(i.isCheck){
+                    LitePal.delete(MyFile::class.java, i.id)
+                }
+            }
         }
 
         //删除数据库中文件夹，包括record和subfolder，和真实文件
@@ -113,6 +105,28 @@ class DatabaseManager{
                     }
                     LitePal.delete<MyFolder>(parentId)
                 }
+        }
+
+        fun move(fileList: ArrayList<MyFile>, folderList: ArrayList<MyFolder>, currentFolder: MyFolder){
+            /*if(fileList.isNotEmpty()){
+                if(fileList[0].myfolder_id == currentFolder.id) return
+                for(i in fileList){
+                    if(i.isCheck) {
+                        currentFolder.fileList.add(i)
+                        i.myfolder_id = currentFolder.id
+                    }
+                }
+                currentFolder.save()
+                LitePal.saveAll(fileList)
+            }*/
+            if(folderList.isNotEmpty()){
+                if(folderList[0].parentId == currentFolder.id) return
+                for(i in folderList){
+                    if(i.isCheck)
+                        i.parentId = currentFolder.id
+                }
+                LitePal.saveAll(folderList)
+            }
         }
 
         fun setOnFindCallback(callBack: FindCallBack){

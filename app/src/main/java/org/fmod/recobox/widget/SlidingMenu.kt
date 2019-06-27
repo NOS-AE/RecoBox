@@ -3,34 +3,34 @@ package org.fmod.recobox.widget
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import org.fmod.recobox.R
-import org.fmod.recobox.util.Util
 
 //侧滑菜单控件，不可拓展，用于侧滑菜单实现和内部显示状态变化
 class SlidingMenu(context: Context, attrs: AttributeSet): HorizontalScrollView(context,attrs){
-    private var mMenuWidth: Int
     private val openWidth: Int
     private val closeWidth: Int
-    private var mScreenWidth = 0
+    private val mMenuWidth: Int
     private var once = true
+
     private var isOpen = false
 
     private var isFolder = false
-    set(value) {
-        field = value
-        mMenuWidth = Util.dp2px(if(isFolder) w else w*3)//根据ui提供的数据
-    }
 
     private var listener: OnOpenListener? = null
 
     companion object {
-        private var checkState = false
-        private const val w = 56f
+        private var screenWidth = 0
+        private const val folderWidth = 56f
+        var checkState = false
+        init {
+            screenWidth = Resources.getSystem().displayMetrics.widthPixels
+        }
     }
 
     init {
@@ -41,11 +41,8 @@ class SlidingMenu(context: Context, attrs: AttributeSet): HorizontalScrollView(c
         }finally {
             a.recycle()
         }
-
-        mScreenWidth = Resources.getSystem().displayMetrics.widthPixels
-        //由于侧滑菜单的dp大小不变，此处将侧滑菜单宽度写死
-        mMenuWidth = Util.dp2px(if(isFolder) w else w*3)//根据ui提供的数据
-        openWidth = mMenuWidth / 3
+        mMenuWidth = org.fmod.recobox.util.Util.dp2px(if(isFolder) folderWidth else folderWidth * 3)
+        openWidth =  mMenuWidth / 3
         closeWidth = openWidth * 2
         overScrollMode = View.OVER_SCROLL_NEVER
         isHorizontalScrollBarEnabled = false
@@ -126,17 +123,13 @@ class SlidingMenu(context: Context, attrs: AttributeSet): HorizontalScrollView(c
             //此处限制线性布局作为Item菜单的容器
             val wrapper = getChildAt(0) as LinearLayout
             //此处限制item宽度为屏幕大小
-            wrapper.getChildAt(0).layoutParams.width = mScreenWidth//RecyclerView Item宽度
-            //长按item事件
-            /*wrapper.getChildAt(0).setOnLongClickListener {
-                if(!checkState && !isOpen) {
-                    Toast.makeText(context, "LongPress", Toast.LENGTH_SHORT).show()
-                    checkState = true
-                }
-                true
-            }*/
+            wrapper.getChildAt(0).layoutParams.width = screenWidth//RecyclerView Item宽度
             once = false
         }
+        /*checkSwitchLayoutParams()
+        if(checkOnce){
+
+        }*/
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
 
@@ -147,20 +140,25 @@ class SlidingMenu(context: Context, attrs: AttributeSet): HorizontalScrollView(c
         super.setOnTouchListener(l)
     }
 
-   /* @SuppressLint("ClickableViewAccessibility")
-    override fun onTouchEvent(ev: MotionEvent?): Boolean {
-        when(ev?.action){
-            MotionEvent.ACTION_UP -> {
-                if(Math.abs(scrollX) > mMenuWidth / 2){
-                    this.smoothScrollTo(mMenuWidth, 0)
-                }else{
-                    this.smoothScrollTo(0,0)
-                }
-                return true
-            }
+    override fun onDraw(canvas: Canvas?) {
+        //checkSwitchLayoutParams()
+        super.onDraw(canvas)
+    }
+
+    /*private fun checkSwitchLayoutParams(){
+        val param: ViewGroup.LayoutParams
+        if(checkOnce){
+            param = layoutParams
+            param.width = screenWidth
+            layoutParams = param
+            checkOnce = false
         }
-        //不拦截其它事件
-        return false
+        else if(exitCheckOnce){
+            param = layoutParams
+            param.width = screenWidth + if(isFolder) folderWidth else fileWidth
+            layoutParams = param
+            exitCheckOnce = false
+        }
     }*/
 
     interface OnOpenListener{

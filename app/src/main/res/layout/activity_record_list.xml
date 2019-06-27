@@ -52,12 +52,33 @@
             android:clickable="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             />
+
+        <TextView
+            android:id="@+id/check_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="15dp"
+            android:text="@string/check_all"
+            android:textColor="@color/colorFont"
+            android:textSize="15sp"
+            android:visibility="gone"
+            android:clickable="true"
+            />
     </android.support.v7.widget.Toolbar>
 
     <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:id="@+id/empty_list_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_empty_page"
+            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/level_rv"
@@ -74,7 +95,8 @@
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/level_rv"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            tools:layout_editor_absoluteX="143dp"
+            app:layout_constraintVertical_bias="1.0"/>
 
         <TextView
             android:id="@+id/move_confirm"
@@ -87,6 +109,63 @@
             android:text="@string/move"
             android:visibility="gone"
             />
+
+
+        <LinearLayout
+            android:id="@+id/check_option_layout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:gravity="center"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:id="@+id/check_option_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_edit_square_enable"
+                android:textSize="11sp"
+                android:text="@string/edit"
+                android:layout_marginEnd="25dp"
+                android:clickable="true"
+                />
+
+            <TextView
+                android:id="@+id/check_option_move"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_edit_square_enable"
+                android:textSize="11sp"
+                android:text="@string/move_to"
+                android:layout_marginEnd="12.5dp"
+                android:clickable="true"
+                />
+
+            <TextView
+                android:id="@+id/check_option_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_move_to_enable"
+                android:textSize="11sp"
+                android:text="@string/delete"
+                android:layout_marginStart="12.5dp"
+                android:clickable="true"
+                />
+
+            <TextView
+                android:id="@+id/check_option_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_share_enable"
+                android:textSize="11sp"
+                android:text="@string/share"
+                android:layout_marginStart="25dp"
+                />
+
+        </LinearLayout>
 
 
         <android.support.design.widget.FloatingActionButton

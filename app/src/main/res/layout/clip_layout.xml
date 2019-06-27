@@ -6,6 +6,26 @@
                                              android:background="@color/white_bg"
     >
 
+    <TextView
+        android:id="@+id/min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/clip_range"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintTop_toTopOf="@id/clip_range"
+        android:text="00:00"
+        />
+
+    <TextView
+        android:id="@+id/max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/clip_range"
+        android:layout_marginStart="1dp"
+        app:layout_constraintTop_toTopOf="@id/clip_range"
+        android:text="00:00"
+        />
+
     <org.ielse.widget.RangeSeekBar
         android:id="@+id/clip_range"
         android:layout_width="match_parent"
@@ -13,32 +33,15 @@
         app:lineColorSelected="@color/colorTheme"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="30dp"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="25dp"
         />
 
     <TextView
         android:id="@+id/confirm_clip"
         android:layout_width="72dp"
         android:layout_height="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:text="裁剪"
-        android:textSize="12sp"
-        android:padding="2dp"
-        android:textStyle="bold"
-        android:background="@drawable/option_confirm_bg"
-        android:gravity="center"
-        android:textColor="@color/colorTheme"
-        />
-
-    <TextView
-        android:id="@+id/confirm_play"
-        android:layout_width="72dp"
-        android:layout_height="24dp"
-        app:layout_constraintEnd_toStartOf="@id/confirm_clip"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/cancel_clip"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="15dp"
@@ -56,7 +59,8 @@
         android:id="@+id/cancel_clip"
         android:layout_width="72dp"
         android:layout_height="24dp"
-        app:layout_constraintEnd_toStartOf="@id/confirm_play"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/confirm_clip"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="15dp"

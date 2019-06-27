@@ -45,5 +45,11 @@
     <string name="exit_account_">不会清除本地录音</string>
 
     <string name="check_title">已选择1个</string>
+    <string name="move_title">请选择移动位置</string>
+    <string name="check_all">全选</string>
+    <string name="edit">编辑</string>
+    <string name="move_to">移动</string>
+    <string name="delete">删除</string>
+    <string name="share">分享</string>
 
 </resources>

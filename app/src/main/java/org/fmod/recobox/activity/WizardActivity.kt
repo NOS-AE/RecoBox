@@ -50,6 +50,17 @@ class WizardActivity : BaseActivity() {
                 startActivity(intent)
                 overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
             }
+
+            override fun onTimeOut(timeOut: Boolean) {
+                runOnUiThread {
+                    if(timeOut){
+                        showToast("网络连接超时")
+                    }else{
+                        showToast("网络连接错误")
+                    }
+                }
+                networkWrong()
+            }
         })
 
         //设置音量控制统一为MUSIC，因为AudioTrack无法动态设置Stream type
@@ -108,6 +119,16 @@ class WizardActivity : BaseActivity() {
         }
     }
 
+    private fun networkWrong(){
+        isLogin = false
+        getSharedPreferences("data", Context.MODE_PRIVATE)
+            .edit()
+            .putBoolean("is_login",false)
+            .apply()
+        startActivity(RecordActivity::class.java)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+
     private fun initDataBase(){
         //初始化litepal
         LitePal.initialize(application)
@@ -125,21 +146,21 @@ class WizardActivity : BaseActivity() {
             num = 0
             parentId = 1
         }
+        //测试文件
+        var file: MyFile
 
-        //根目录下的测试文件
-        val testFile = MyFile()
-        testFile.run {
-            filename = "测试文件"
-            description = "没有"
-            length = 5.8
-            duration = 203
-            date = "2018/8/3"
+        for(i in 1..5){
+            file = MyFile()
+            file.filename = i.toString()
+            file.duration = i*100L
+            file.isCheck = false
+            file.date = "i:i:i"
+            file.length = i*1000.0
+            rootFolder.fileList.add(file)
         }
-        rootFolder.fileList.add(testFile)
+        LitePal.saveAll(rootFolder.fileList)
         rootFolder.save()//父目录比子目录和子文件夹先创建
-        testFile.save()
         starFolder.save()
-        LitePal.delete<MyFile>(testFile.id)//删除测试文件
     }
 
     private fun askPermissions(){

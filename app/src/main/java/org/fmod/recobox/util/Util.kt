@@ -15,5 +15,11 @@ class Util{
             val second = String.format("%02d",sec%60)
             return "$hour:$minute:$second"
         }
+
+        fun sec2TimeNoHour(sec: Long): String{
+            val minute = String.format("%02d",sec%3600/60)
+            val second = String.format("%02d",sec%60)
+            return "$minute:$second"
+        }
     }
 }

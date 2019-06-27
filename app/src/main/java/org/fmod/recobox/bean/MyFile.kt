@@ -8,10 +8,10 @@ import org.litepal.crud.LitePalSupport
 class MyFile: LitePalSupport(){
     @Column(unique = true)
     var id = 0L
-    @Column(unique = true)
-    var filename = ""
+    var myfolder_id = 0L
     @Column(ignore = true)
     var isCheck = false
+    var filename = ""
     //文件创建日期和时间（精确到分）
     var date = ""
     //录音时长（s）
@@ -24,6 +24,6 @@ class MyFile: LitePalSupport(){
     var star = false
 
     override fun toString(): String {
-        return "filename:$filename date:$date duration:$duration description:$description size:$length"
+        return "folderId:${myfolder_id} filename:$filename date:$date duration:$duration description:$description size:$length"
     }
 }

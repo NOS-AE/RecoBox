@@ -4,13 +4,16 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.text.InputFilter
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.widget.EditText
 import android.widget.PopupWindow
 import kotlinx.android.synthetic.main.activity_record_play.*
+import kotlinx.android.synthetic.main.activity_record_play.view.*
 import kotlinx.android.synthetic.main.clip_layout.view.*
+import kotlinx.android.synthetic.main.description_layout.view.*
 import org.fmod.recobox.R
 import org.fmod.recobox.util.AudioUtil
 import org.fmod.recobox.util.Util
@@ -20,6 +23,8 @@ class RecordPlayActivity : BaseActivity() {
 
     private lateinit var runnable: Runnable
     private lateinit var handler: Handler
+
+    private var descriptionChange = false
 
     private var isPlaying = false
 
@@ -45,7 +50,6 @@ class RecordPlayActivity : BaseActivity() {
             }else{
                 play_progress.progress = 0
                 play_record_time.text = Util.sec2Time(0L)
-
             }
         }
 
@@ -80,6 +84,10 @@ class RecordPlayActivity : BaseActivity() {
     }
 
     private fun setListener(){
+        record_play_return_record_list.setOnClickListener {
+            onBackPressed()
+        }
+
         record_play_speaker_earpiece_switch.setOnClickListener {
             setSpeakerOn()
             if(isSpeaker){
@@ -125,35 +133,60 @@ class RecordPlayActivity : BaseActivity() {
 
         @SuppressLint("InflateParams")
         var view = LayoutInflater.from(this).inflate(R.layout.description_layout,null,false)
-        (view as EditText).run {
+        view.description_edit.run {
             setSingleLine(false)
             filters = arrayOf(InputFilter.LengthFilter(100))
             //isHorizontalScrollBarEnabled = false
         }
+        view.confirm_description.setOnClickListener {
+            description.text = (popupDescription.contentView.description_edit).text.toString()
+            descriptionChange = true
+            BaseActivity.description = description.text.toString()
+            popupDescription.dismiss()
+        }
         popupDescription = PopupWindow(view, Util.dp2px(280f), Util.dp2px(300f),true)
         popupDescription.animationStyle = R.style.PopupAnimation
         popupDescription.elevation = 30f
-        popupDescription.setOnDismissListener {
-            description.text = (popupDescription.contentView as EditText).text.toString()
-        }
 
         @SuppressLint("InflateParams")
         view = LayoutInflater.from(this).inflate(R.layout.clip_layout,null,false)
-        //view.clip_range.setValue(0f,length.toFloat())
-        view.confirm_play.setOnClickListener {
-            val current = view.clip_range.currentRange
-            AudioUtil.playMusic(filename,current[0] / length, current[1] / length)
+        view.clip_range.run {
+            setOnRangeChangedListener { _, min, max ->
+                logcat("$min,$max")
+                logcat("${(min*length)},${(max*length)}")
+                popupClip.contentView.min.text = Util.sec2TimeNoHour((min*length).toLong())
+                popupClip.contentView.max.text = Util.sec2TimeNoHour((max*length).toLong())
+            }
         }
         view.confirm_clip.setOnClickListener {
+            val min = popupClip.contentView.clip_range.currentRange[0]
+            val max = popupClip.contentView.clip_range.currentRange[1]
+            if((max-min)*length < 1){
+                showToast("长度小于1秒，裁剪失败")
+            }
+            else{
+                AudioUtil.clipRecord(filename,min,max)
+                length = ((max-min)*length).toInt()
+                play_progress.max = length
+                progress_total_time.text = Util.sec2TimeNoHour(length.toLong())
+            }
             popupClip.dismiss()
-            AudioUtil
+        }
+        view.cancel_clip.setOnClickListener {
+            popupClip.dismiss()
         }
         popupClip = PopupWindow(view, Util.dp2px(280f), Util.dp2px(150f),true)
         popupClip.animationStyle = R.style.PopupAnimation
         popupClip.elevation = 30f
-
-
     }
 
+    override fun onBackPressed() {
+        if(descriptionChange){
+            BaseActivity.description = popupDescription.contentView.description_edit.text.toString()
+        }else{
+            BaseActivity.description = null
+        }
+        super.onBackPressed()
+    }
 
 }

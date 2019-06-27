@@ -59,6 +59,16 @@ class QQLogin : BaseActivity() {
                 startActivity(intent)
                 overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
             }
+
+            override fun onTimeOut(timeOut: Boolean) {
+                runOnUiThread {
+                    if(timeOut)
+                        showToast("网络连接超时")
+                    else
+                        showToast("网络连接错误")
+                }
+                mTencent.logout(this@QQLogin)
+            }
         })
     }
 
@@ -129,6 +139,9 @@ class QQLogin : BaseActivity() {
             }
 
             override fun onError(p0: UiError?) {
+                isLogin = false
+                mTencent.logout(this@QQLogin)
+                showToast("QQ登录失败，请检查网络")
                 logcat("getUserInfo onError")
             }
         })
@@ -146,6 +159,9 @@ class QQLogin : BaseActivity() {
         }
 
         override fun onError(p0: UiError?) {
+            isLogin = false
+            mTencent.logout(this@QQLogin)
+            showToast("QQ登录失败，请检查网络")
             logcat("QQLogin onError")
         }
     }

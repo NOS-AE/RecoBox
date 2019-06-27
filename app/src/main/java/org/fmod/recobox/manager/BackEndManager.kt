@@ -9,6 +9,10 @@ import okhttp3.*
 import org.fmod.recobox.bean.MyFile
 import org.json.JSONObject
 import java.io.*
+import java.net.ConnectException
+import java.net.SocketImpl
+import java.net.SocketTimeoutException
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 //后端相关
@@ -32,7 +36,12 @@ class BackEndManager{
         private val JSON = MediaType.parse("application/json; charset=utf-8")
         //private val FILE = MediaType.parse("application/octet-stream")
 
-        private val client = OkHttpClient()
+        private val client = OkHttpClient
+            .Builder()
+            .connectTimeout(5L,TimeUnit.SECONDS)
+            .readTimeout(5L,TimeUnit.SECONDS)
+            .writeTimeout(5L,TimeUnit.SECONDS)
+            .build()
         private val gson = Gson()
 
         private lateinit var account: String//access_token
@@ -49,6 +58,12 @@ class BackEndManager{
                 .build()
             client.newCall(request).enqueue(object :Callback{
                 override fun onFailure(call: Call, e: IOException) {
+                    if(e is SocketTimeoutException){
+                        userInfoCallback?.onTimeOut(true)
+                    }
+                    else if(e is ConnectException){
+                        userInfoCallback?.onTimeOut(false)
+                    }
                     Log.d(TAG,"Backend login fail: $e")
                 }
 
@@ -76,6 +91,11 @@ class BackEndManager{
                 .build()
             client.newCall(request).enqueue(object :Callback{
                 override fun onFailure(call: Call, e: IOException) {
+                    if(e is SocketTimeoutException){
+                        userInfoCallback?.onTimeOut(true)
+                    }else{
+                        userInfoCallback?.onTimeOut(false)
+                    }
                     Log.d(TAG,"Backend login fail: $e")
                 }
 
@@ -113,6 +133,12 @@ class BackEndManager{
                 .build()
             client.newCall(request).enqueue(object : Callback{
                 override fun onFailure(call: Call, e: IOException) {
+                    if(e is SocketTimeoutException){
+                        userInfoCallback?.onTimeOut(true)
+                    }
+                    else if(e is ConnectException){
+                        userInfoCallback?.onTimeOut(false)
+                    }
                     Log.d(TAG,"Backend getUserInfo fail: $e")
                 }
 
@@ -140,6 +166,11 @@ class BackEndManager{
                 .build()
             client.newCall(request).enqueue(object : Callback{
                 override fun onFailure(call: Call, e: IOException) {
+                    if(e is SocketTimeoutException){
+                        userInfoCallback?.onTimeOut(true)
+                    }else{
+                        userInfoCallback?.onTimeOut(false)
+                    }
                     Log.d(TAG,"Get avatar from qq fail: $e")
                 }
 
@@ -164,6 +195,11 @@ class BackEndManager{
                 .build()
             client.newCall(request).enqueue(object :Callback{
                 override fun onFailure(call: Call, e: IOException) {
+                    if(e is SocketTimeoutException){
+                        userInfoCallback?.onTimeOut(true)
+                    }else{
+                        userInfoCallback?.onTimeOut(false)
+                    }
                     Log.d(TAG,"uploadNickname fail: $e")
                 }
 
@@ -194,6 +230,11 @@ class BackEndManager{
 
             client.newCall(request).enqueue(object : Callback{
                 override fun onFailure(call: Call, e: IOException) {
+                    if(e is SocketTimeoutException){
+                        userInfoCallback?.onTimeOut(true)
+                    }else{
+                        userInfoCallback?.onTimeOut(false)
+                    }
                     Log.d(TAG,"Upload info fail: $e")
                 }
 
@@ -219,6 +260,11 @@ class BackEndManager{
                 .build()
             client.newCall(request).enqueue(object : Callback{
                 override fun onFailure(call: Call, e: IOException) {
+                    if(e is SocketTimeoutException){
+                        userInfoCallback?.onTimeOut(true)
+                    }else{
+                        userInfoCallback?.onTimeOut(false)
+                    }
                     Log.d(TAG,"getFileInfo fail: $e")
                 }
 
@@ -406,6 +452,7 @@ class BackEndManager{
     //获取用户信息完成回调
     interface UserInfoCallback{
         fun onComplete(avatar: String, nickname: String, size: Double)
+        fun onTimeOut(timeOut: Boolean)
     }
 
     //获取文件信息完成回调

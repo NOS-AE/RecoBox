@@ -99,10 +99,16 @@ class RecordActivity : BaseActivity() {
         setListener()
         setDrawerItems()
 
-        bindService(Intent(this,AudioService::class.java),connection, Context.BIND_AUTO_CREATE)
+        val tIntent = Intent(this,AudioService::class.java)
+        tIntent.putExtra("package_name",packageName)
+        tIntent.putExtra("class_name",localClassName)
+        bindService(tIntent,connection, Context.BIND_AUTO_CREATE)
 
         rootFolder = DatabaseManager.findRootFolder()
-        Log.d(TAG,rootFolder.toString())
+        for(i in rootFolder.fileList){
+            logcat(i.toString())
+        }
+        logcat(rootFolder.toString())
     }
 
     private fun init(){
@@ -209,6 +215,8 @@ class RecordActivity : BaseActivity() {
                 }
                 1->{
                     //联系团队
+                    startActivity(ContactActivity::class.java)
+                    overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
                 }
                 2->{
                     //更多设置
@@ -419,9 +427,10 @@ class RecordActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
-        Log.d("MyApp","onDestroy")
         animatorManager.stopRecordAnimation()//防止无法正确回收活动
+        unbindService(connection)
+        Log.d("MyApp","onDestroy")
+        super.onDestroy()
     }
 
     override fun onResume() {
@@ -433,6 +442,12 @@ class RecordActivity : BaseActivity() {
     override fun onBackPressed() {
         when{
             drawer.isDrawerOpen(Gravity.START) -> drawer.closeDrawer(Gravity.START)
+            recordState == R_RECORDING ->{
+                val intent = Intent(Intent.ACTION_MAIN)
+                intent.addCategory(Intent.CATEGORY_HOME)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
+                startActivity(intent)
+            }
             System.currentTimeMillis() - startTime > TWICE_CLICK_INTERVAL -> {
                 showToast("再按一次返回键退出")
                 startTime = System.currentTimeMillis()

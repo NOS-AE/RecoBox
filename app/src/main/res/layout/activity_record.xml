@@ -54,7 +54,7 @@
             android:layout_marginTop="104dp"
             android:textSize="45sp"
             android:textColor="@color/colorFont"
-            android:text="00:00:00"
+            android:text="00:00.00"
             android:scaleY="1.2"
             />
 

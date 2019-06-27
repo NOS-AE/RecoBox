@@ -8,6 +8,8 @@ import android.os.Environment
 import android.support.v4.content.FileProvider
 import android.util.Log
 import org.fmod.recobox.bean.MyFile
+import org.fmod.recobox.bean.MyFolder
+import org.litepal.LitePal
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -60,14 +62,13 @@ class FileUtil{
             }
         }
 
-        fun shareMultiFile(nameList: ArrayList<String>, context: Context){
+        fun shareMultiFile(fileList: ArrayList<String>, context: Context){
             thread {
                 var mp3File: String
-
                 //转码成MP3
                 val uriList = ArrayList<Uri>()
-                for (i in nameList) {
-                    mp3File ="$tempMp3Path/$i.mp3"
+                for (i in fileList) {
+                    mp3File = "$tempMp3Path/$i.mp3"
                     AudioUtil.pcmToMp3(
                         "$soundAudioPath/$i.pcm",
                         mp3File
@@ -75,8 +76,7 @@ class FileUtil{
                     uriList.add(FileProvider.getUriForFile(context, SHARE_AUTHORITY, File(mp3File)))
                 }
                 encodeListener?.onComplete()
-
-                val minType = getMinType("$tempMp3Path/${nameList[0]}.mp3")
+                val minType = getMinType("$tempMp3Path/${fileList[0]}.mp3")
                 //分享文件
                 val share = Intent(Intent.ACTION_SEND_MULTIPLE)
                 share.run {
@@ -131,9 +131,11 @@ class FileUtil{
         fun deleteFiles(fileList: ArrayList<MyFile>){
             var file: File
             for(i in fileList){
-                file = File("$soundAudioPath/${i.filename}.pcm")
-                if(file.exists()){
-                    file.delete()
+                if(i.isCheck) {
+                    file = File("$soundAudioPath/${i.filename}.pcm")
+                    if (file.exists()) {
+                        file.delete()
+                    }
                 }
             }
         }
@@ -146,9 +148,19 @@ class FileUtil{
 
         fun deleteTempMp3(){
             val file = File(tempMp3Path)
+            Log.d("MyApp", tempMp3Path)
             val list = file.listFiles()
+            list?:return
             for(i in list){
                 i.delete()
+            }
+        }
+
+        fun renameFile(old:String, new: String){
+            val from = File("$soundAudioPath/$old.pcm")
+            val to = File("$soundAudioPath/$new.pcm")
+            if(from.exists()){
+                from.renameTo(to)
             }
         }
 

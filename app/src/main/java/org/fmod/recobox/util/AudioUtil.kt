@@ -4,6 +4,7 @@ import android.media.*
 import android.util.Log
 import org.fmod.recobox.util.FileUtil.Companion.soundAudioPath
 import org.fmod.recobox.util.FileUtil.Companion.tempAudioPath
+import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import kotlin.concurrent.thread
@@ -192,20 +193,28 @@ class AudioUtil{
             }
         }
 
-        /*fun clipRecord(filename: String, p1: Float, p2: Float){
+        fun clipRecord(filename: String, p1: Float, p2: Float){
             val data = ByteArray(BUFFER_SIZE)
-            val file = File(FileUtil.soundAudioPath + "/" + filename + ".pcm")
+            val file = File("$soundAudioPath/$filename.pcm")
 
-            val fos = FileOutputStream(file)
-            val fis = FileInputStream(audioPath)
-            var times = fis.available() / 2 / BUFFER_SIZE
+            val fos = FileOutputStream("$soundAudioPath/${filename}temp.pcm")
+            val fis = FileInputStream(file)
+            fis.skip((fis.available() * p1).toLong())
+            val totalByte = (fis.available() * (p2 - p1)).toLong()
+
+            var times = totalByte / BUFFER_SIZE
+
             while((times--) > 0){
                 fis.read(data,0, BUFFER_SIZE)
                 fos.write(data)
             }
             fos.close()
             fis.close()
-        }*/
+
+            val finalFile = File("$soundAudioPath/$filename.pcm")
+            file.delete()
+            File("$soundAudioPath/${filename}temp.pcm").renameTo(finalFile)
+        }
 
     }
     interface PlayListener{

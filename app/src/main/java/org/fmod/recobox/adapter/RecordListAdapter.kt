@@ -14,11 +14,13 @@ import org.fmod.recobox.bean.MyFile
 import org.fmod.recobox.bean.MyFolder
 import org.fmod.recobox.widget.SlidingMenu
 
-class RecordListAdapter(
-    private var mFolderList: ArrayList<MyFolder>,
-    private var mRecordList: ArrayList<MyFile>): RecyclerView.Adapter<ViewHolder>(){
-    var checkState = false
+//TODO: 重复使用的bean用暂存变量储存
 
+class RecordListAdapter(
+    var mFolderList: ArrayList<MyFolder>,
+    var mRecordList: ArrayList<MyFile>): RecyclerView.Adapter<ViewHolder>(){
+    var checkState = false
+    var moveState = false
     companion object {
         // view types
         const val VIEW_TYPE_EMPTY = 0
@@ -48,11 +50,6 @@ class RecordListAdapter(
                         menuOpenItem = v as SlidingMenu
                     }
                 })
-                v.folder_main_item.setOnLongClickListener {
-                    Log.d("MyApp","on folder longclick")
-                    listener?.onCheck(v)
-                    true
-                }
                 ViewHolder(v)
             }
             VIEW_TYPE_FILE -> {
@@ -70,8 +67,10 @@ class RecordListAdapter(
                 v = LayoutInflater.from(p0.context).inflate(R.layout.star_folder_layout,p0,false)
                 setOnCloseTouchListener(v)
                 v.setOnClickListener {
-                    //进入星标文件夹
-                    listener?.clickStarFolder()
+                    if(!checkState && !moveState) {
+                        //进入星标文件夹
+                        listener?.clickStarFolder()
+                    }
                 }
                 ViewHolder(v)
             }
@@ -92,38 +91,124 @@ class RecordListAdapter(
         when(p0.itemViewType){
             VIEW_TYPE_FOLDER->{
                 (v as SlidingMenu).shut()
+                //长按文件夹，进入多选
+                v.folder_main_item.setOnLongClickListener {
+                    if(!checkState && !moveState) {
+                        checkState = true
+                        mFolderList[p1].isCheck = true
+                        listener?.onCheck(v,true,p1)
+                        listener?.onSelect(true)
+                        notifyDataSetChanged()
+                        true
+                    }else
+                        false
+                }
                 //点击文件夹
                 v.folder_main_item.setOnClickListener {
-                    Log.d("MyApp","click folder when menu open")
-                    listener?.clickFolder(mFolderList[p1].id)
+                    if(checkState) {
+                        mFolderList[p1].isCheck = !mFolderList[p1].isCheck
+                        it.folder_check.setImageResource(
+                            if(mFolderList[p1].isCheck) {
+                                listener?.onSelect(true)
+                                R.drawable.ic_check
+                            }
+                            else {
+                                listener?.onUnselect(true)
+                                R.drawable.ic_unchecked
+                            }
+                        )
+                    }else {
+                        Log.d("MyApp", "click folder when menu open")
+                        listener?.clickFolder(mFolderList[p1].id)
+                    }
                 }
                 //点击删除文件夹
                 v.slide_delete.setOnClickListener {
                     Log.d("MyApp","remove $p1")
                     menuOpenItem = null
-                    listener?.clickFolderDelete(mFolderList[p1].id, p1)
                     notifyItemRemoved(p1)
                     notifyItemRangeChanged(p1,itemCount)
+                    listener?.clickFolderDelete(mFolderList[p1].id, p1)
                 }
+
                 v.folder_name.text = mFolderList[p1].name
                 val info = "内含${mFolderList[p1].num}个音频文件"
                 v.folder_info.text = info
+                //多选下的视图
+                if(checkState || moveState){
+                    //多选和移动状态都隐藏文件夹的滑动菜单
+                    if(v.slide_delete.visibility != View.GONE)
+                        v.slide_delete.visibility =  View.GONE
+                }else{
+                    if(v.slide_delete.visibility != View.VISIBLE)
+                        v.slide_delete.visibility =  View.VISIBLE
+                }
+                if(checkState){
+                    if(v.folder_more.visibility != View.GONE)
+                        v.folder_more.visibility = View.GONE
+                    v.folder_check.run {
+                        if(visibility != View.VISIBLE)
+                            visibility = View.VISIBLE
+                        setImageResource(
+                            if(mFolderList[p1].isCheck)
+                                R.drawable.ic_check
+                            else
+                                R.drawable.ic_unchecked
+                        )
+                    }
+                }else{
+                    if(v.folder_more.visibility != View.VISIBLE)
+                        v.folder_more.visibility = View.VISIBLE
+                    if(v.folder_check.visibility != View.GONE)
+                        v.folder_check.visibility = View.GONE
+                }
             }
             VIEW_TYPE_FILE->{
                 (v as SlidingMenu).shut()
+                //长按文件进入多选
+                v.record_main_item.setOnLongClickListener {
+                    if(!checkState) {
+                        checkState = true
+                        mRecordList[p1 - mFolderList.size].isCheck = true
+                        listener?.onCheck(v,false,p1-mFolderList.size)
+                        listener?.onSelect(false)
+                        notifyDataSetChanged()
+                        true
+                    }else
+                        false
+                }
                 //点击more
                 setOnCloseTouchListener(v.record_more)
                 v.record_more.setOnClickListener {
-                    menuOpenItem = v
-                    v.openMenu()
+                    if(!checkState) {
+                        menuOpenItem = v
+                        v.openMenu()
+                    }
                 }
                 //点击文件
                 v.record_main_item.setOnClickListener{
-                    val bean = mRecordList[p1 - mFolderList.size]
-                    Log.d("MyApp", "file length: ${bean.duration}")
-                    listener?.clickItem(bean.filename, bean.duration, bean.description)
+                    if(checkState) {
+                        mRecordList[p1 - mFolderList.size].isCheck = !mRecordList[p1 - mFolderList.size].isCheck
+                        it.record_check.setImageResource(
+                            if(mRecordList[p1 - mFolderList.size].isCheck) {
+                                listener?.onSelect(false)
+                                R.drawable.ic_check
+                            }
+                            else {
+                                listener?.onUnselect(false)
+                                R.drawable.ic_unchecked
+                            }
+                        )
+                    }else {
+                        val bean = mRecordList[p1 - mFolderList.size]
+                        Log.d("MyApp", "file length: ${bean.duration}")
+                        listener?.clickItem(bean)
+                    }
                 }
-                //点击剪切 TODO:待删除
+                //点击星标
+                v.record_slide_star.setOnClickListener {
+                    listener?.clickStar(v.record_slide_star,mRecordList[p1 - mFolderList.size])
+                }
 
                 //点击删除文件
                 v.record_slide_delete.setOnClickListener {
@@ -141,10 +226,42 @@ class RecordListAdapter(
                 //点击播放/停止按钮
                 setOnCloseTouchListener(v.record_play_stop)
                 v.record_play_stop.setOnClickListener {
-                    listener?.clickPlayStop(it,mRecordList[p1 - mFolderList.size].filename)
+                    if(!checkState)
+                        listener?.clickPlayStop(it,mRecordList[p1 - mFolderList.size].filename)
                 }
+                v.record_slide_star.setImageResource(
+                    if(mRecordList[p1 - mFolderList.size].star)
+                        R.drawable.ic_star_fill
+                    else
+                        R.drawable.ic_star_white
+                )
+
                 v.file_name.text = mRecordList[p1 - mFolderList.size].filename
                 v.file_info.text = org.fmod.recobox.util.Util.sec2Time(mRecordList[p1 - mFolderList.size].duration)
+                //多选下的视图
+                if(checkState){
+                    if(v.record_slide_container.visibility != View.GONE)
+                        v.record_slide_container.visibility =  View.GONE
+                    if(v.record_more.visibility != View.GONE)
+                        v.record_more.visibility = View.GONE
+                    v.record_check.run {
+                        if(visibility != View.VISIBLE)
+                            visibility = View.VISIBLE
+                        setImageResource(
+                            if(mRecordList[p1 - mFolderList.size].isCheck)
+                                R.drawable.ic_check
+                            else
+                                R.drawable.ic_unchecked
+                        )
+                    }
+                }else{
+                    if(v.record_slide_container.visibility != View.VISIBLE)
+                        v.record_slide_container.visibility =  View.VISIBLE
+                    if(v.record_more.visibility != View.VISIBLE)
+                        v.record_more.visibility = View.VISIBLE
+                    if(v.record_check.visibility != View.GONE)
+                        v.record_check.visibility = View.GONE
+                }
             }
         }
     }
@@ -153,7 +270,7 @@ class RecordListAdapter(
         return when{
             mRecordList.size + mFolderList.size == 0 ->
                 VIEW_TYPE_EMPTY
-            position == itemCount - 1 ->
+            position == itemCount-1->
                 VIEW_TYPE_BOTTOM
             position >= mFolderList.size ->
                 VIEW_TYPE_FILE
@@ -166,8 +283,8 @@ class RecordListAdapter(
     }
 
     override fun getItemCount(): Int {
-        return if(mRecordList.size + mFolderList.size == 0){
-            1
+        return if(mRecordList.isEmpty() && mFolderList.isEmpty()){
+            0//1
         }else{
             mRecordList.size + mFolderList.size + 1
         }
@@ -190,7 +307,6 @@ class RecordListAdapter(
                 }
                 else-> {
                     if(downAndClose){
-                        Log.d("MyApp","downAndClose == true")
                     }
                     downAndClose
                 }
@@ -215,7 +331,7 @@ class RecordListAdapter(
     interface ItemClickListener{
         /*Record Item*/
         //点击整个item
-        fun clickItem(filename: String, length: Long, description: String)
+        fun clickItem(bean: MyFile)
         //播放/停止
         fun clickPlayStop(v: View,filename: String)
         /*Record Item侧滑菜单*/
@@ -223,6 +339,8 @@ class RecordListAdapter(
         fun clickRecordDelete(bean: MyFile)
         //分享
         fun clickShare(filename: String)
+        //星标
+        fun clickStar(v:View, bean: MyFile)
 
         /*Folder Item*/
         //点击进入下一层文件夹
@@ -234,7 +352,11 @@ class RecordListAdapter(
         fun clickFolderDelete(parentId: Long, index: Int)
 
         //item被选择
-        fun onCheck(v: View)
+        fun onCheck(v: View,isFolder: Boolean, index: Int)
+        //选择了文件夹或文件
+        fun onSelect(isFolder: Boolean)
+        //反选了文件或文件夹
+        fun onUnselect(isFolder: Boolean)
     }
 
 }

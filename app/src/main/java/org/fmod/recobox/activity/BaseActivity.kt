@@ -31,6 +31,8 @@ abstract class BaseActivity: AppCompatActivity(){
         //根目录
         lateinit var rootFolder: MyFolder
 
+        //
+        var description: String? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
