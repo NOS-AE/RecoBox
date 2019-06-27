@@ -46,6 +46,7 @@ class RecordPlayActivity : BaseActivity() {
                 time++
                 play_record_time.text = Util.sec2Time(time.toLong())
                 play_progress.progress = time
+                progress_current_time.text = Util.sec2TimeNoHour(time.toLong())
                 handler.postDelayed(runnable,1000)
             }else{
                 play_progress.progress = 0
